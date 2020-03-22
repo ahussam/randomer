@@ -105,7 +105,7 @@ function enable() {
 }
 function disable() {
     document.getElementById("generate").disabled = true;
-    document.getElementById("info").innerHTML = ` <div class="alert alert-primary text-center" role="alert">Move the mouse until enough gets collected.</div>`;
+    document.getElementById("info").innerHTML = ` <div class="alert alert-primary text-center" role="alert">Move the mouse until enough entropy gets collected.</div>`;
 
 }
 
