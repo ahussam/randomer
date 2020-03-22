@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>True Random Number Generator</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script type="text/javascript" src="randomGenerator.js"></script>
+    <script type="text/javascript" src="utilites.js"></script>
+
+    <style id="compiled-css" type="text/css">
+        body {
+            background: #00b4db;
+            background: -webkit-linear-gradient(to right, #0083b0, #00b4db);
+            background: linear-gradient(to right, #0083b0, #00b4db);
+            height: 100vh;
+        }
+
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+
+        .custom-file-label.rounded-pill {
+            border-radius: 50rem;
+        }
+
+        .custom-file-label.rounded-pill::after {
+            border-radius: 0 50rem 50rem 0;
+        }
+
+        #content1 {
+            display: none;
+        }
+
+        #content2 {
+            display: none;
+        }
+
+        #toggle1:checked~#content1 {
+            display: block;
+        }
+
+        #toggle2:checked~#content2 {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="container p-4">
+            <div class="row mb-5 text-center text-white">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="display-4">True Random Number Generator</h1>
+                    <p class="lead">
+                        Get real random number, image, and text by moving the mouse
+                        pointer.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5 mx-auto">
+                    <div class="p-5 bg-white shadow rounded-lg">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAACiCAMAAADiKyHJAAAAilBMVEX29vYAAAD6+vr5+fn9/f3q6urv7+/09PTy8vLZ2dnp6emdnZ3ExMTk5OQQEBC2trbPz8+SkpJycnKlpaWurq7b29sMDAxeXl6+vr5CQkKYmJiysrJsbGwbGxshISHS0tIxMTGFhYVNTU16enopKSk/Pz9kZGQ1NTVWVlYfHx9JSUmBgYFBQUFaWlqJw/WUAAALEklEQVR4nO2da3uiPBCGmWQ4KGdRxLMIotX2//+9d5KAVWtbbXtt30Lu/bCIYVeeazKZSYZgGBqNRqPRaDQajUaj0Wg0Go2mrXD+27/gT8K47zvIfvtn/DWQDw8A5TixtXSPYLkl1IT42z/mD4EJwNO05/eSCUCkXd3doAuVhZxzJAmrhzor67TMbAhGLQAOwHrgSowHXe7aPAK7PsQczAeuxGDR5dGEr8CpD53l9pErGey6bHFs1gjHQkgeUYJD0WXhaEiohcPtq4tjyD8NiE2Iuy1c2hzAtBECsx3AUH5i7wnIMnC7LBxLNlIZXMGTVQ+vpIkgoi/Y9DCkvyhYMUzrVUKGSHGM93qC05luDRXMrVAIEZ4lDlYAeeTCRHw9BigYjqbjLcCsloZjNh8Xc+g1gRwaUZgXoYhrOLN5JwwRpxWi5ZE+p45HA62LjKK6EQnhxCnEY5WSpcoHcmeuPjfC4XAhP29Nzld0OBfteNPJyVrbqCQOKmu+pLv2zu7OM2R/XQlhsBCaLOb59AChkmIvRHo6CSeyNoJS3gqZPD4is6PEzTipZqzccRtHEXwuZmRL4J/fmxCEecqHUWoBi0yYTQZz0YicGxxNNCvpBKlxH2DgeX301+IKbzYAyPdSywH68VJOH7TP/7FdwrxwK7vl2VnSaaTCOgr0JqZUle9k5II7Gn65sLNEykHKjpFR4opTcYbRMJMKsZZBChtxsF4oxdsFW2eMYQTV+a2hN43dGeS1cHUvJlMjy+E+7KQlNuEL9eWsUVBISUlcAEG+svoHErAcjrgH+xZa3Fp0SJyfT8YptwbppBau9mUkGVkO+T7psjCuhxMcB2rQoFxXhC4imBkyYZM5wJQO+Ahe2mlxUpPAb6yCPsBzPAjSVFpWWPsyClOApKRvpSWS1srQsFqoaQJrAR6XitamGKuWJFwLuypupd3gDEqz1kc4LXJy5qIRLqm/cIKtOIINMs6xqgPgOm4Rl8msnz7XX+Qq8uO9NiZnOFCzauTA1rXNkduX3beCWrgmFSOLE+dLiKNeH4+NYeVq5hg3SicSTs0k0xdyNCWLa+F0AMbPtVw5KYe1218xeUJYEvm4rI5kpY8zVKi22BxhInMEOatCrmwKqSkFPAk3VlfSdZv2TRaTDPURWRgUmfLuRwpHyEVJXz9UgbAhLG4ohcjl2BHTkDk1ZKIBeRbvmtyDnJ+6gC3AlwdWCf3WKcf9rL4n7oioVbh3i4KwIj8O5GBIMvpNi5H6m1kepQXGkZqLr9iLysAK1Ywd6qAQx/WYwDZXYWIr4KcQi9tuEYvIQnVGkU8IH2VHr22bAyYSUZblUnRuUa6wK7JmbNk2Sjdz8iSc3z7hzmnScVzF48qNXuqu+V7z01wdjbKvs0osjK/CXXvXduFOiNSUlOh/7eLrNIGPBx3R7cfRumk0Go1Go9H8L5Dx8WmmiLNuV8rdD4/yYrwumtS/N/RG7VtT+CkorT8dO2odtc7hcUIfcrUO5tioje8Clm8Gr+Wa02LWO9UgsnBeVao6wgzKY9S+yd6vUD85Ihad5VSdAsWiw6kNw2ZqxFlTs7nuttQ/fU91SO5Fd8xFcissdnPdWdlsC83cLb/vqSXWzgqbx+AewCbSHe8BONrCvvx4xbRuD8D7GzUS6NjiMdgYlu1bz/sH8Lgwv6cb6+gIwb7ZR9kwtz9vpXkDpm0ss/kHiMo4bXJfgJtBU6mjeQgctLGy6x/AMlg7nzdrFT8zm2uXnSkXaUi8n7hhvkp+4F/5Q1Af2/2IV39TedNy5NMev/0j/iIUgXV6i4JHEI+aom1aBiNwXq+7GKJi9aIVkzVzHeuBt5FP59q+l8wPu7LcHojtEvYRl6kqhouxGmLF576XxHHsJqHdscHyDRzR96aDCbxlna/ItPqQwlEox0fj5euXh9/+4b8KQ2fk7uRDfk+7igwpC71omLjuNC524uw+61cQBFBZzEBZVV5OJi+b3TLt8D5C1POygVjIg10xW5lydY+Qvo7g0RHkg5PBPg2gXKGxg8M0sgzb4NxcQkdXITiyaCBE2+RhX6yP3mpi5k8QwLJMFyRgbwRg2JZjOrZj2XDnIwstG0UY67kH0RNdn98UTcHRiamjplAFAF4GG9s0LcuhPyMo7/qPeOi1SDmGYtMCWMQ+fjbFy3oQlIEwuBmFdoVt9k3LNhzHvTM+NmHdngk5Fk3kiMnfV4079e1SBhGsSbaBiXiExDIdy7AsyxjfnNp9s+kIN+/t0n8ATr5qMfuwnIj314VSgIVifJj3xIPOFXi2pTAOb7a3ocjY8eKX5Kpnbl93JfnrkBaF9XE/Ywlsmk1ZprtBTwXCAK4X9UaRRzxdRiMUDI4SuWPBlaBs3x6LM2z/M8+GMRxPCVczM4c0wJ4Fx+fNDS/fipPBbg3Li037cPzQlmr/cz41ASzUY2+XJ3fnWcX5UkK8VY9ber7tlJdX8l57DO4OSLgb9+v0jNVsFoZhFiaj1w7Jxf4iaRwZhmWaxvxqkaFjWzJbN4t5uRgBFOdymAvILduiSIWiPBcmnZ6OesROKE554UI1AQ3Zd5ZNdG2/tLdwCpL9WjeTlzfc402q56Tz5f07mFlSNssabe7b6oHUpvjQ6bbR4RTmBqlm+GJ8TT/YRZgTwkNSOJ2J2arS63TpHVlPSqqpCDiA4q0ZCbUQ0fF7UeQNk8h0/Dks10H6aSzebnABAzlHNYl7/tUCtNixkJvZMInHm3UTBS4oJgwWwaIMYDnssNFRpiGSiXiFeFmVLubls+JiWv75ZbNTe3IEwXIjkpHNqrOejvcD2GfXpcIc+SpWopXryXwQD0f9vkkZnG35XgxBKlSbrgNoUZXEo/E+H0XXU70MrUSplnsrQ60p8sYeObOFcOki3ZRkqo/sSf+/hvcenbfl18ZmZXO5Tub57NYUM/chLctgsSBrTNqzqwbbwnfcDsPRkRQJ5p6NODvcsiduwiJ6SVNYD50WDav28usVqDQeRBUZ25hUE5uo7W/XZLJMDMOTYbvq0u2nh97ocA6aCQXBZT6qM1Fcw+16Mczh2Wtbukp3+0V/LTefPrjWaYBl7y46WJ7RMtnEY2/XSwe3Gikuzx0Bquj8wUES7r1a1tYMCWd8XA4oFvwN0x+NelHPv2g6Jpd/2f3YtNMvLbgk3+w327QpvslOwrAE9v1ryVu2lP8NeHRKnxaBSJ1efZjZ7cmOT2ARpHk89HrRyOr7bnp6vYPRTrf1YzAPDswQJSSWZZq4PBdO8wE4hQF3xJahtm2aPTjtcqv5GBzAUR05jmNl8K3srEtgCZ4KzairOjFsdLhxF6IASdTRONRTZfVNroW7C5ZBajnk4ISfE5VP2sXdBwvhKQ+zcObGxaDYw14b3J1YlzX9Ha2hfp93J8pYVonXb6038/kGPnu/Y/cSLuZW781qMOS2rR5NMs1POurLjUXWdoP7H3gXo0oyugXlB4dvD5dYdC9Y4Wb6/eVO3sUXoOOw/NrbCF6hkK9zPdUQVdPfNRbmlu1Zo/+3dP6hVo1G0z64ric3vrJTEHrVvYXnbSZ8dJNM+WK97oW9V/AIykd349qXSdf2BbqBDaeXg959ia1lk/O9eor3SzCrNQW6vwT/2HFxZrVn14KfhMWH5IPn+NmogpeuD6U3Ea9+T6fvxSbiBRm7zscgt7HdFKB6fXut3EXo9K25T9pXmPpDoO2Fp+k1vppX1eCsuldnWR9w9kQ5c+VWGVqth7F7q95Kj6Nf4E3FuUaj0Wg0Go1Go9FoNBqNRqPRaDT/gP8AvpeD9osopwUAAAAASUVORK5CYII="
+                            alt="" width="200" class="d-block mx-auto mb-4 rounded-pill" />
+
+                        <h4 class="text-center mb-4">Options</h4>
+                        <h6 class="text-center mb-4 text-muted">
+                            <label class="radio-inline"><input type="radio" name="optradio" onclick="hide()" checked /> Number</label>
+                            <label class="radio-inline"><input type="radio" name="optradio" onclick="hide()"/> Image</label>
+                            <label class="radio-inline"><input type="radio" name="optradio" onclick="show();"/> Text</label>
+                            <input class="form-control form-control-sm" type="text" placeholder="Text's Length 1 - 9" id="len" style="display:none;" maxlength="1" minlength="1">
+                        </h6>
+                       
+                        <h4 class="text-center mb-4">
+                            <button type="button" class="btn btn-primary" id="generate" disabled
+                                onclick="generateRandom();">
+                                Generate
+                            </button>
+                        </h4>
+                        <div>
+                            <br />
+                            <div id="info">
+                                <div class="alert alert-primary text-center" role="alert">
+                                    Move the mouse until enough gets collected.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+
+</html>
